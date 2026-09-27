@@ -1,0 +1,65 @@
+MergeSort            random     n=   100  median=    0.021 ms  depth= 4  ops=639
+MergeSort            random     n=  1000  median=    0.045 ms  depth= 7  ops=10225
+MergeSort            random     n= 10000  median=    0.953 ms  depth=11  ops=126755
+MergeSort            random     n=100000  median=    6.114 ms  depth=14  ops=1639624
+MergeSort            sorted     n=   100  median=    0.001 ms  depth= 4  ops=240
+MergeSort            sorted     n=  1000  median=    0.007 ms  depth= 7  ops=3916
+MergeSort            sorted     n= 10000  median=    0.101 ms  depth=11  ops=58704
+MergeSort            sorted     n=100000  median=    1.272 ms  depth=14  ops=739600
+MergeSort            reverse    n=   100  median=    0.001 ms  depth= 4  ops=728
+MergeSort            reverse    n=  1000  median=    0.011 ms  depth= 7  ops=10340
+MergeSort            reverse    n= 10000  median=    0.130 ms  depth=11  ops=94192
+MergeSort            reverse    n=100000  median=    1.865 ms  depth=14  ops=1213232
+MergeSort            duplicates n=   100  median=    0.019 ms  depth= 4  ops=597
+MergeSort            duplicates n=  1000  median=    0.042 ms  depth= 7  ops=9549
+MergeSort            duplicates n= 10000  median=    0.753 ms  depth=11  ops=119684
+MergeSort            duplicates n=100000  median=    3.158 ms  depth=14  ops=1540217
+QuickSort            random     n=   100  median=    0.033 ms  depth= 4  ops=732
+QuickSort            random     n=  1000  median=    0.094 ms  depth= 7  ops=11596
+QuickSort            random     n= 10000  median=    1.176 ms  depth= 9  ops=161828
+QuickSort            random     n=100000  median=    7.777 ms  depth=11  ops=2031230
+QuickSort            sorted     n=   100  median=    0.003 ms  depth= 4  ops=713
+QuickSort            sorted     n=  1000  median=    0.031 ms  depth= 7  ops=11258
+QuickSort            sorted     n= 10000  median=    0.388 ms  depth= 9  ops=161998
+QuickSort            sorted     n=100000  median=    4.375 ms  depth=11  ops=2078129
+QuickSort            reverse    n=   100  median=    0.003 ms  depth= 4  ops=679
+QuickSort            reverse    n=  1000  median=    0.030 ms  depth= 7  ops=11528
+QuickSort            reverse    n= 10000  median=    0.374 ms  depth= 9  ops=164455
+QuickSort            reverse    n=100000  median=    4.176 ms  depth=11  ops=2072116
+QuickSort            duplicates n=   100  median=    0.001 ms  depth= 3  ops=293
+QuickSort            duplicates n=  1000  median=    0.010 ms  depth= 3  ops=2957
+QuickSort            duplicates n= 10000  median=    0.098 ms  depth= 2  ops=30018
+QuickSort            duplicates n=100000  median=    1.050 ms  depth= 3  ops=287157
+DeterministicSelect  random     n=   100  median=    0.026 ms  depth= 6  ops=625
+DeterministicSelect  random     n=  1000  median=    0.020 ms  depth= 8  ops=4029
+DeterministicSelect  random     n= 10000  median=    0.403 ms  depth=12  ops=81075
+DeterministicSelect  random     n=100000  median=    1.249 ms  depth=14  ops=418821
+DeterministicSelect  sorted     n=   100  median=    0.002 ms  depth= 6  ops=458
+DeterministicSelect  sorted     n=  1000  median=    0.024 ms  depth= 8  ops=5722
+DeterministicSelect  sorted     n= 10000  median=    0.307 ms  depth=12  ops=62891
+DeterministicSelect  sorted     n=100000  median=    1.123 ms  depth=16  ops=644495
+DeterministicSelect  reverse    n=   100  median=    0.001 ms  depth= 5  ops=653
+DeterministicSelect  reverse    n=  1000  median=    0.011 ms  depth= 9  ops=7643
+DeterministicSelect  reverse    n= 10000  median=    0.111 ms  depth=12  ops=83321
+DeterministicSelect  reverse    n=100000  median=    1.321 ms  depth=16  ops=857923
+DeterministicSelect  duplicates n=   100  median=    0.001 ms  depth= 4  ops=335
+DeterministicSelect  duplicates n=  1000  median=    0.005 ms  depth= 5  ops=3054
+DeterministicSelect  duplicates n= 10000  median=    0.050 ms  depth= 7  ops=31227
+DeterministicSelect  duplicates n=100000  median=    1.568 ms  depth= 9  ops=498375
+ClosestPair          random     n=   100  median=    0.073 ms  depth= 7  ops=136
+ClosestPair          random     n=  1000  median=    0.524 ms  depth=10  ops=1149
+ClosestPair          random     n= 10000  median=    5.007 ms  depth=13  ops=13012
+ClosestPair          random     n=100000  median=   37.269 ms  depth=17  ops=142600
+ClosestPair          sorted     n=   100  median=    0.007 ms  depth= 7  ops=131
+ClosestPair          sorted     n=  1000  median=    0.065 ms  depth=10  ops=1125
+ClosestPair          sorted     n= 10000  median=    1.266 ms  depth=13  ops=13050
+ClosestPair          sorted     n=100000  median=   18.225 ms  depth=17  ops=142630
+ClosestPair          reverse    n=   100  median=    0.004 ms  depth= 7  ops=129
+ClosestPair          reverse    n=  1000  median=    0.062 ms  depth=10  ops=1130
+ClosestPair          reverse    n= 10000  median=    1.489 ms  depth=13  ops=13039
+ClosestPair          reverse    n=100000  median=   22.443 ms  depth=17  ops=142608
+ClosestPair          duplicates n=   100  median=    0.362 ms  depth= 7  ops=93
+ClosestPair          duplicates n=  1000  median=    0.300 ms  depth=10  ops=536
+ClosestPair          duplicates n= 10000  median=    3.100 ms  depth=13  ops=7712
+ClosestPair          duplicates n=100000  median=   22.039 ms  depth=17  ops=96608
+Saved 64 configurations and 448 measured trials to results/.
