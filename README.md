@@ -88,18 +88,34 @@ Maximum recursion depth for random input (root = 1):
 
 [Full results](results/results.csv) include depth for every input type, comparison counts, distance checks and recursive calls. [Raw results](results/raw.csv) contain all 448 measured runs. Depth is the maximum over seven runs; other counts are medians. Closest Pair counts distance checks, not all its work. QuickSort loop steps do not add stack depth.
 
+### How to read the graphs
+
+`Experiment.java` measures the runs and writes `results.csv`. `PlotResults.java` reads that file and draws the lines. The pictures show measured values, not values guessed from a formula.
+
+- **X axis:** input size n. Moving one step right means 10 times more items.
+- **Time graph:** Y is milliseconds. Each colour is one algorithm. Lower means less time. The Y scale also uses steps of 10.
+- **Depth graph:** Y is the most algorithm calls open at once. Lower means less stack depth. This Y scale is normal, not logarithmic.
+- The four small panels show random, sorted, reverse and duplicate inputs. Lines connect the four measured sizes; sizes between them were not tested.
+
+For example, random MergeSort at n=100,000 has a median of 6,114,416 ns. Dividing by 1,000,000 gives **6.114416 ms**, the point on the time graph. Its depth is **14**, the point on the depth graph. The median is the fourth value after sorting seven measured times.
+
 ![Time for all input types](docs/plots/time-vs-n.png)
 
 ![Depth for all input types](docs/plots/depth-vs-n.png)
 
 ## Discussion
 
-- The results mostly match the expected growth. Small inputs can give noisy times. Measurements support the theory but do not prove it.
-- Sorted input helps MergeSort. Many duplicates help three-way QuickSort: at n=100,000 it took 1.050 ms, compared with 7.777 ms for random input. Different input types use different seeded datasets.
-- QuickSort uses less stack because each new call works on at most half the current data. This keeps depth O(log n), even when time is O(n²).
-- Median-of-Medians removes about 30% or more of the candidates each step, apart from rounding. This gives linear worst-case time.
-- Closest Pair checks nearby points instead of every pair. At n=100,000, it made 142,600 distance checks for random input. Full search would need 4,999,950,000 checks.
-- JVM warmup, cache, garbage collection and other running programs affect time. Five warmup runs may not be enough. For example, selection took longer at n=100 than at n=1,000 in this run.
+**Does the result fit the theory?** More data usually takes more time. The depth grows slowly. This fits the expected complexity, but four sizes cannot prove a time bound.
+
+**Does input order matter?** Yes. MergeSort was faster on sorted data. QuickSort was faster with repeated values because it skips the whole equal group. Selection only finds one number, so its time is not a fair comparison with sorting the full array.
+
+**Why does QuickSort use the smaller side first?** Each new call gets at most half the current data. Fewer calls stay open at once, so the stack stays small. Bad pivots can still make the total work slow.
+
+**Why is Median-of-Medians O(n)?** The pivot removes a fixed part of the data each time. The next two problems together have about 90% of the old size. Adding the work gives a linear total.
+
+**Why is Closest Pair faster than checking every pair?** It splits the points and only checks a few nearby points across the middle. Full search checks n(n-1)/2 pairs. This becomes very large when n grows.
+
+**Why are some times uneven?** Java gets faster after warmup. Cache, memory cleanup and other programs also affect time. Small runs are especially hard to measure. That is why each case runs seven times and uses the middle time.
 
 ## Tests
 

@@ -1,33 +1,47 @@
 import java.util.Objects;
 import java.util.Random;
 
-/** Randomized three-way partitioning; recurse on smaller side, loop on larger. */
+// Use a random pivot. Recurse on the smaller side to save stack space.
 public final class QuickSorter {
     public final Metrics metrics = new Metrics();
+
     private final Random random;
     public QuickSorter(long seed) { random = new Random(seed); }
-    public void sort(int[] a) {
-        Objects.requireNonNull(a, "array");
+
+    public void sort(int[] array) {
+        Objects.requireNonNull(array, "array");
         metrics.reset();
-        if (a.length > 0) sort(a, 0, a.length, 1);
+        if (array.length > 0) sort(array, 0, array.length, 1);
     }
-    private void sort(int[] a, int lo, int hi, int depth) {
+
+    private void sort(int[] array, int left, int right, int depth) {
         metrics.enter(depth);
-        while (hi - lo > 1) {
-            int pivot = a[lo + random.nextInt(hi - lo)];
-            int lt = lo, i = lo, gt = hi;
-            while (i < gt) {
-                int c = metrics.compare(a[i], pivot);
-                if (c < 0) metrics.swap(a, lt++, i++);
-                else if (c > 0) metrics.swap(a, i, --gt);
-                else i++;
+        while (right - left > 1) {
+            int pivot = array[left + random.nextInt(right - left)];
+            // Values before smallerEnd are smaller than the pivot.
+            // Values from largerStart onwards are larger than the pivot.
+            int smallerEnd = left;
+            int i = left;
+            int largerStart = right;
+            while (i < largerStart) {
+                int comparison = metrics.compare(array[i], pivot);
+                if (comparison < 0) {
+                    metrics.swap(array, smallerEnd, i);
+                    smallerEnd++;
+                    i++;
+                } else if (comparison > 0) {
+                    largerStart--;
+                    metrics.swap(array, i, largerStart);
+                } else {
+                    i++;
+                }
             }
-            if (lt - lo < hi - gt) {
-                if (lt - lo > 1) sort(a, lo, lt, depth + 1);
-                lo = gt;
+            if (smallerEnd - left < right - largerStart) {
+                if (smallerEnd - left > 1) sort(array, left, smallerEnd, depth + 1);
+                left = largerStart;
             } else {
-                if (hi - gt > 1) sort(a, gt, hi, depth + 1);
-                hi = lt;
+                if (right - largerStart > 1) sort(array, largerStart, right, depth + 1);
+                right = smallerEnd;
             }
         }
     }

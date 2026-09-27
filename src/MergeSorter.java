@@ -1,35 +1,53 @@
 import java.util.Objects;
 
-/** Stable merge sort with a single reusable buffer and insertion-sort cutoff. */
+// Split, sort both halves, then merge them.
 public final class MergeSorter {
+
     private static final int CUTOFF = 16;
     public final Metrics metrics = new Metrics();
 
-    public void sort(int[] a) {
-        Objects.requireNonNull(a, "array");
+
+    public void sort(int[] array) {
+        Objects.requireNonNull(array, "array");
         metrics.reset();
-        if (a.length > 0) sort(a, new int[a.length], 0, a.length, 1);
+        if (array.length > 0) sort(array, new int[array.length], 0, array.length, 1);
     }
-    private void sort(int[] a, int[] buffer, int lo, int hi, int depth) {
+
+    private void sort(int[] array, int[] buffer, int left, int right, int depth) {
         metrics.enter(depth);
-        if (hi - lo <= CUTOFF) {
-            for (int i = lo + 1; i < hi; i++) {
-                int value = a[i], j = i;
-                while (j > lo && metrics.compare(a[j - 1], value) > 0) {
-                    a[j] = a[j - 1]; j--;
+        // Insertion sort is enough for a small part.
+        if (right - left <= CUTOFF) {
+            for (int i = left + 1; i < right; i++) {
+                int value = array[i];
+                int j = i;
+                while (j > left && metrics.compare(array[j - 1], value) > 0) {
+                    array[j] = array[j - 1];
+                    j--;
                 }
-                a[j] = value;
+                array[j] = value;
             }
             return;
         }
-        int mid = lo + (hi - lo) / 2;
-        sort(a, buffer, lo, mid, depth + 1);
-        sort(a, buffer, mid, hi, depth + 1);
-        int i = lo, j = mid, k = lo;
-        while (i < mid && j < hi)
-            buffer[k++] = metrics.compare(a[i], a[j]) <= 0 ? a[i++] : a[j++];
-        while (i < mid) buffer[k++] = a[i++];
-        while (j < hi) buffer[k++] = a[j++];
-        System.arraycopy(buffer, lo, a, lo, hi - lo);
+        // Sort both halves. The right boundary is not included.
+        int mid = left + (right - left) / 2;
+        sort(array, buffer, left, mid, depth + 1);
+        sort(array, buffer, mid, right, depth + 1);
+        // Merge the two sorted halves.
+        int i = left;
+        int j = mid;
+        int k = left;
+        while (i < mid && j < right) {
+            if (metrics.compare(array[i], array[j]) <= 0) {
+                buffer[k] = array[i];
+                i++;
+            } else {
+                buffer[k] = array[j];
+                j++;
+            }
+            k++;
+        }
+        while (i < mid) buffer[k++] = array[i++];
+        while (j < right) buffer[k++] = array[j++];
+        System.arraycopy(buffer, left, array, left, right - left);
     }
 }
