@@ -16,6 +16,10 @@ public final class Experiment {
     private static volatile double sink;
     private record Sample(long ns, int depth, long operations, long calls) {}
 
+    public static void main(String[] args) throws IOException {
+        run();
+    }
+
     public static void run() throws IOException {
         Files.createDirectories(Path.of("results"));
         try (PrintWriter out = new PrintWriter(Files.newBufferedWriter(Path.of("results/results.csv")));

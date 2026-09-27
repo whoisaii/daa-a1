@@ -1,8 +1,5 @@
-Divide-and-Conquer | Assignment 1
 Input: [9, 1, 7, 3, 3, 8, -2]
 MergeSort: [-2, 1, 3, 3, 7, 8, 9]
 QuickSort: [-2, 1, 3, 3, 7, 8, 9]
-Select k=3 (zero-based): 3
+Select k=3: 3
 Closest distance: 1.414214
-Depth: merge=1, quick=2, select=2, closest=2
-Comparisons: merge=17, quick=16, select=26; distance evaluations=2
