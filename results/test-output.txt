@@ -1,0 +1,5 @@
+PASS sorting: edge cases, 4 distributions, 200 random arrays; depth bounds
+PASS selection: 500 random datasets x 3 ranks; every rank for sizes 1..80
+PASS closest pair: brute-force references up to n=2000; 100000-point known answer
+PASS invalid arguments and metric reset
+ALL TESTS PASSED: 6 176 checks (0,312 s)
